@@ -1,9 +1,11 @@
 require("dotenv").config();
 const { MongoClient } = require("mongodb");
 const uri = process.env.MONGO_URI;
+const fs = require("fs");
 
 const client = new MongoClient(uri, {
 	tls: true,
+	ca: [fs.readFileSync("<path to certificate authority>")],
 });
 
 (async () => {
